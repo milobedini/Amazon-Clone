@@ -9,6 +9,7 @@ const Header = () => {
       <img
         className="header-logo"
         src="http://pngimg.com/uploads/amazon/amazon_PNG11.png"
+        alt="logo"
       />
       <div className="header-search">
         <input className="header-search-input" type="text" />
