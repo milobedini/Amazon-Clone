@@ -7,6 +7,7 @@ import { auth } from './firebase'
 // import { onAuthStateChanged } from 'firebase/auth'
 import { useEffect } from 'react'
 import { useStateValue } from './components/StateProvider'
+import Checkout from './components/Checkout'
 
 function App() {
   const [{}, dispatch] = useStateValue()
@@ -42,6 +43,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/checkout" element={<Checkout />} />
           </Routes>
         </main>
       </BrowserRouter>
