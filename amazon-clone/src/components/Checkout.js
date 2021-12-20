@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { forwardRef } from 'react'
 import '../styles/Checkout.scss'
 import CheckoutProduct from './CheckoutProduct'
 import { useStateValue } from './StateProvider'

@@ -28,9 +28,7 @@ const Subtotal = () => {
       <small className="subtotal-gift">
         <input type="checkbox" /> This order contains a gift
       </small>
-      <button onClick={(event) => navigate('/payment')}>
-        Proceed to Checkout
-      </button>
+      <button onClick={() => navigate('/payment')}>Proceed to Checkout</button>
     </div>
   )
 }
