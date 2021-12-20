@@ -2,6 +2,11 @@ import React, { useState } from 'react'
 import '../styles/Login.scss'
 import { Link, useNavigate } from 'react-router-dom'
 import { auth } from '../firebase'
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signOut,
+} from 'firebase/auth'
 
 const Login = () => {
   const navigate = useNavigate()
@@ -11,24 +16,56 @@ const Login = () => {
   const signIn = (event) => {
     event.preventDefault()
 
-    auth
-      .signInWithEmailAndPassword(email, password)
-      .then((auth) => {
+    // auth
+    //   .signInWithEmailAndPassword(email, password)
+    //   .then((auth) => {
+    //     navigate('/')
+    //   })
+    //   .catch((error) => alert(error.message))
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        const user = userCredential.user
+        console.log(user)
         navigate('/')
       })
-      .catch((error) => alert(error.message))
+      .catch((error) => {
+        const errorCode = error.code
+        const errorMessage = error.message
+        console.log(errorCode, errorMessage)
+      })
   }
 
   const register = (event) => {
     event.preventDefault()
-    auth
-      .createUserWithEmailAndPassword(email, password)
-      .then((auth) => {
-        if (auth) {
-          navigate('/')
-        }
+    // auth
+    //   .createUserWithEmailAndPassword(email, password)
+    //   .then((auth) => {
+    //     if (auth) {
+    //       navigate('/')
+    //     }
+    //   })
+    //   .catch((error) => alert(error.message))
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        const user = userCredential.user
+        console.log(user)
       })
-      .catch((error) => alert(error.message))
+      .catch((error) => {
+        const errorCode = error.code
+        const errorMessage = error.message
+        console.log(errorCode, errorMessage)
+      })
+  }
+
+  const logOut = (event) => {
+    event.preventDefault()
+    signOut(auth)
+      .then(() => {
+        console.log('Signed Out')
+      })
+      .catch((error) => {
+        console.log(error.message)
+      })
   }
 
   return (

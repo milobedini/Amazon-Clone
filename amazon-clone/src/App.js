@@ -4,21 +4,31 @@ import Home from './components/Home'
 import Header from './components/Header'
 import Login from './components/Login'
 import { auth } from './firebase'
+// import { onAuthStateChanged } from 'firebase/auth'
+import { useEffect } from 'react'
+import { useStateValue } from './components/StateProvider'
 
 function App() {
+  const [{}, dispatch] = useStateValue()
+
   useEffect(() => {
     auth.onAuthStateChanged((authUser) => {
-      console.log(`User: ${authUser}`)
+      const user = auth.currentUser
+      console.log(`User: ${user.email}`)
 
       if (authUser) {
+        // user logged in
         dispatch({
           type: 'SET_USER',
           user: authUser,
+          // sends into data layer
         })
       } else {
+        // user logged out
         dispatch({
           type: 'SET_USER',
           user: null,
+          // erases from data layer
         })
       }
     })
