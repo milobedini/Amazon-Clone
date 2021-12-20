@@ -15,7 +15,9 @@ function App() {
   useEffect(() => {
     auth.onAuthStateChanged((authUser) => {
       const user = auth.currentUser
-      console.log(`User: ${user.email}`)
+      if (user) {
+        console.log(`User: ${user.email}`)
+      }
 
       if (authUser) {
         // user logged in

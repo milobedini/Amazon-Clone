@@ -27,12 +27,15 @@ const reducer = (state, action) => {
         (basketItem) => basketItem.id === action.id
       )
       let newBasket = [...state.basket]
+      // if item in basket
       if (index >= 0) {
+        // removes the item from the new basket
         newBasket.splice(index, 1)
       } else {
         console.warn(`Product ${action.id} is not in basket.`)
       }
       return {
+        // keeps previous state with new basket
         ...state,
         basket: newBasket,
       }
