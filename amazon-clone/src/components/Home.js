@@ -1,8 +1,40 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import '../styles/Home.scss'
 import Product from './Product'
+import { db } from '../firebase'
+import { collection, getDocs, addDoc } from 'firebase/firestore'
 
 const Home = () => {
+  const [items, setItems] = useState([])
+  const itemsRef = collection(db, 'products')
+  const [newTitle, setNewTitle] = useState('')
+  const [newPrice, setNewPrice] = useState(0)
+  const [newRating, setNewRating] = useState(0)
+  const [newImage, setNewImage] = useState('')
+
+  const addItem = async () => {
+    await addDoc(itemsRef, {
+      title: newTitle,
+      price: newPrice,
+      rating: newRating,
+      image: newImage,
+    })
+  }
+
+  useEffect(() => {
+    const getItems = async () => {
+      const data = await getDocs(itemsRef)
+      console.log(data.docs)
+      setItems(
+        data.docs.map((doc) => ({
+          ...doc.data(),
+          id: doc.id,
+        }))
+      )
+    }
+    getItems()
+  }, [])
+
   return (
     <div className="home">
       <div className="home-container">
@@ -11,7 +43,35 @@ const Home = () => {
           src="https://images-eu.ssl-images-amazon.com/images/G/02/digital/video/merch2016/Hero/Covid19/Generic/GWBleedingHero_ENG_COVIDUPDATE__XSite_1500x600_PV_en-GB._CB428684220_.jpg"
           alt=""
         />
-        {/* below will not be hard coded */}
+        <input
+          type={'text'}
+          placeholder="Title"
+          onChange={(event) => {
+            setNewTitle(event.target.value)
+          }}
+        />
+        <input
+          type={'number'}
+          placeholder="Price"
+          onChange={(event) => {
+            setNewPrice(event.target.value)
+          }}
+        />
+        <input
+          type={'number'}
+          placeholder="Rating"
+          onChange={(event) => {
+            setNewRating(event.target.value)
+          }}
+        />
+        <input
+          type={'text'}
+          placeholder="Image"
+          onChange={(event) => {
+            setNewImage(event.target.value)
+          }}
+        />
+        <button onClick={addItem}>Add Product</button>
         <div className="home-row">
           <Product
             id="12321341"
@@ -20,6 +80,17 @@ const Home = () => {
             rating={5}
             image="https://images-na.ssl-images-amazon.com/images/I/51Zymoq7UnL._SX325_BO1,204,203,200_.jpg"
           />
+          {items.map((item) => {
+            return (
+              <Product
+                id={item.id}
+                title={item.title}
+                price={item.price}
+                rating={item.rating}
+                image={item.image}
+              />
+            )
+          })}
           <Product
             id="49538094"
             title="Kenwood kMix Stand Mixer for Baking, Stylish Kitchen Mixer with K-beater, Dough Hook and Whisk, 5 Litre Glass Bowl"
