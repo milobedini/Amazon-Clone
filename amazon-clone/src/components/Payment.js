@@ -1,15 +1,19 @@
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js'
 import React, { useState, useEffect } from 'react'
 import CurrencyFormat from 'react-currency-format'
-import { Link, Navigate, NavigationType, useNavigate } from 'react-router-dom'
+import { Link, useNavigate, useNavigationType } from 'react-router-dom'
 import '../styles/Payment.scss'
 import CheckoutProduct from './CheckoutProduct'
 import { getBasketTotal } from './reducer'
 import { useStateValue } from './StateProvider'
-import axios from 'axios'
+import axios from './Axios'
+import { db } from '../firebase'
+import { collection, addDoc } from 'firebase/firestore'
+// import { NavigationActions } from 'react-navigation'
 
 const Payment = () => {
   const navigate = useNavigate()
+
   // pull the data layer
   const [{ basket, user }, dispatch] = useStateValue()
 
@@ -37,6 +41,9 @@ const Payment = () => {
     getClientSecret()
   }, [basket])
 
+  console.log('The secret is ->', clientSecret)
+  console.log(db)
+
   const handleSubmit = async (event) => {
     // submit stripe stuff
     event.preventDefault()
@@ -50,12 +57,28 @@ const Payment = () => {
         },
       })
       .then(({ paymentIntent }) => {
-        // payment confirmation
+        // paymentIntent = payment confirmation
+
+        try {
+          // adds user to users collection and adds order into the users' orders collection
+          const docRef = addDoc(collection(db, 'users', user?.uid, 'orders'), {
+            basket: basket,
+            amount: paymentIntent.amount,
+            created: paymentIntent.created,
+          })
+        } catch (err) {
+          console.log('Could not add doc, error =>', err)
+        }
+
         setSucceeded(true)
         setError(null)
         setProcessing(false)
 
-        navigate.reset('/orders')
+        dispatch({
+          type: 'EMPTY_BASKET',
+        })
+
+        navigate('/orders')
       })
   }
 
