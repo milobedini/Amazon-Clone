@@ -130,17 +130,17 @@ const Payment = () => {
           </div>
           <div className="payment-details">
             <form onSubmit={handleSubmit}>
-              <CardElement onChange={handleChange} />
-
               <div className="payment-price-container">
                 <CurrencyFormat
-                  renderText={(value) => <h3>Order Total: {value}</h3>}
+                  renderText={(value) => <h4>Order Total: {value}</h4>}
                   decimalScale={2}
                   value={getBasketTotal(basket)}
                   displayType={'text'}
                   thousandSeparator={true}
                   prefix="£"
                 />
+                <CardElement onChange={handleChange} />
+
                 <button disabled={processing || disabled || succeeded}>
                   {/* disabled for all these states */}
                   <span>{processing ? <p>Processing...</p> : 'Buy Now'}</span>
