@@ -47,7 +47,7 @@ const Header = () => {
         </Link>
         <div className="header-option">
           <span className="header-option-one">Your</span>
-          <span className="header-option-two">Prime</span>
+          <span className="header-option-two">Account</span>
         </div>
         <Link to="/checkout">
           <div className="header-option-basket">
