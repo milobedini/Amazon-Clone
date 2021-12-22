@@ -1,3 +1,5 @@
+import { toast } from 'react-toastify'
+
 export const initialState = {
   basket: [],
   user: null,
@@ -13,6 +15,13 @@ const reducer = (state, action) => {
     // spread state so previous state is not lost
     // then add items to basket array in reducer
     case 'ADD_TO_BASKET':
+      toast.success(`${action.item.title} added to cart`, {
+        position: 'bottom-right',
+      })
+      // localStorage.setItem(
+      //   'cartItems',
+      //   JSON.stringify([...state.basket, action.item])
+      // )
       return {
         ...state,
         basket: [...state.basket, action.item],
@@ -30,11 +39,15 @@ const reducer = (state, action) => {
       let newBasket = [...state.basket]
       // if item in basket
       if (index >= 0) {
+        toast.info(`item removed from basket`, {
+          position: 'bottom-right',
+        })
         // removes the item from the new basket
         newBasket.splice(index, 1)
       } else {
         console.warn(`Product ${action.id} is not in basket.`)
       }
+
       return {
         // keeps previous state with new basket
         ...state,

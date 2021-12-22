@@ -14,6 +14,8 @@ import { Elements } from '@stripe/react-stripe-js'
 import Orders from './components/Orders'
 import AddProduct from './components/AddProduct'
 import EditProduct from './components/EditProduct'
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 const promise = loadStripe(
   'pk_test_51K8nLHICFeSjij0Mp1SaCzr3s9r6DiP3e5H6PUnVw8qG9U4PCZOoZgmBhGq9e6QgPqqXTrvO0KLkHNwhRE51e4Gj00LfkGV4mk'
@@ -53,6 +55,7 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <Header />
+        <ToastContainer />
         <main>
           <Routes>
             <Route path="/" element={<Home />} />

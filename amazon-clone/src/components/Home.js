@@ -8,6 +8,7 @@ import { useStateValue } from './StateProvider'
 import FilterButton from './FilterButton'
 import Search from './Search'
 import hero from '../images/hero.jpg'
+import { ToastContainer } from 'react-toastify'
 
 const filterMap = {
   All: () => true,
