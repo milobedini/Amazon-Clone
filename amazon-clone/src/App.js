@@ -12,12 +12,15 @@ import Payment from './components/Payment'
 import { loadStripe } from '@stripe/stripe-js'
 import { Elements } from '@stripe/react-stripe-js'
 import Orders from './components/Orders'
+import AddProduct from './components/AddProduct'
+import EditProduct from './components/EditProduct'
 
 const promise = loadStripe(
   'pk_test_51K8nLHICFeSjij0Mp1SaCzr3s9r6DiP3e5H6PUnVw8qG9U4PCZOoZgmBhGq9e6QgPqqXTrvO0KLkHNwhRE51e4Gj00LfkGV4mk'
 )
 
 function App() {
+  // eslint-disable-next-line
   const [{}, dispatch] = useStateValue()
 
   useEffect(() => {
@@ -43,6 +46,7 @@ function App() {
         })
       }
     })
+    // eslint-disable-next-line
   }, [])
 
   return (
@@ -53,7 +57,9 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/add" element={<AddProduct />} />
             <Route path="/checkout" element={<Checkout />} />
+            <Route path="/:id/edit" element={<EditProduct />} />
             <Route
               path="/payment"
               element={
