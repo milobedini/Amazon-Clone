@@ -1,13 +1,14 @@
-import { doc, updateDoc } from 'firebase/firestore'
-import React, { useState } from 'react'
+import { collection, doc, getDoc, updateDoc } from 'firebase/firestore'
+import React, { useState, useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { db } from '../firebase'
 import '../styles/EditProduct.scss'
+import { useForm } from 'react-hook-form'
 
 const EditProduct = () => {
   const { id } = useParams()
-
   const navigate = useNavigate()
+
   const [data, setData] = useState({
     title: '',
     price: 0,
@@ -15,12 +16,44 @@ const EditProduct = () => {
     category: '',
   })
 
+  const [preloadedValues, setPreloadedValues] = useState({
+    title: '',
+    price: 0,
+    image: '',
+    category: '',
+  })
+
+  const itemRef = doc(db, 'products', id)
+
+  useEffect(() => {
+    const getItem = async () => {
+      const data = await getDoc(itemRef)
+      const product = data.data()
+      console.log(product)
+      setPreloadedValues({
+        title: product.title,
+        price: product.price,
+        image: product.image,
+        category: product.category,
+      })
+      setData({
+        title: product.title,
+        price: product.price,
+        image: product.image,
+        category: product.category,
+      })
+    }
+    getItem()
+    // eslint-disable-next-line
+  }, [])
+
   const handleFormChange = (event) => {
     const { name, value } = event.target
     setData({
       ...data,
       [name]: value,
     })
+    console.log(data)
   }
 
   const updateProduct = async (event) => {
@@ -47,16 +80,18 @@ const EditProduct = () => {
             name="title"
             placeholder="Title"
             onChange={handleFormChange}
+            defaultValue={preloadedValues.title}
           />
         </div>
         <div>
           <label htmlFor="price"></label>
           <input
-            type={'number'}
+            type="number"
             id="price"
             name="price"
             placeholder="Price"
             onChange={handleFormChange}
+            defaultValue={preloadedValues.price}
           />
         </div>
 
@@ -68,6 +103,7 @@ const EditProduct = () => {
             name="image"
             placeholder="Image"
             onChange={handleFormChange}
+            defaultValue={preloadedValues.image}
           />
         </div>
         <div>
@@ -78,6 +114,7 @@ const EditProduct = () => {
             name="category"
             placeholder="Category"
             onChange={handleFormChange}
+            defaultValue={preloadedValues.category}
           />
         </div>
         <div>
