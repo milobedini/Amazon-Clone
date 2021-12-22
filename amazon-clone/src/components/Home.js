@@ -5,12 +5,29 @@ import { db } from '../firebase'
 import { collection, getDocs } from 'firebase/firestore'
 import { Link } from 'react-router-dom'
 import { useStateValue } from './StateProvider'
+import FilterButton from './FilterButton'
+import Search from './Search'
+import hero from '../images/hero.jpg'
+
+const filterMap = {
+  All: () => true,
+  Books: (item) => item.category.includes('book'),
+  DIY: (item) => item.category.includes('DIY'),
+  Electronics: (item) => item.category.includes('electronics'),
+  HomeAndGarden: (item) => item.category.includes('home'),
+  Kitchen: (item) => item.category.includes('kitchen'),
+}
+
+const filterNames = Object.keys(filterMap)
 
 const Home = () => {
   const [{ user }, dispatch] = useStateValue()
 
   const [items, setItems] = useState([])
   const itemsRef = collection(db, 'products')
+
+  const [filter, setFilter] = useState('All')
+  const [searchText, setSearchText] = useState('')
 
   useEffect(() => {
     const getItems = async () => {
@@ -27,35 +44,54 @@ const Home = () => {
     // eslint-disable-next-line
   }, [])
 
+  const filterList = filterNames.map((name) => (
+    <FilterButton
+      key={name}
+      name={name}
+      isPressed={name === filter}
+      setFilter={setFilter}
+    />
+  ))
+
   return (
     <div className="home">
       <div className="home-container">
-        <img
-          className="home-image"
-          src="https://images-eu.ssl-images-amazon.com/images/G/02/digital/video/merch2016/Hero/Covid19/Generic/GWBleedingHero_ENG_COVIDUPDATE__XSite_1500x600_PV_en-GB._CB428684220_.jpg"
-          alt=""
-        />
-        {user ? (
-          <Link to="/add">
-            <div className="list-product-link">
-              <h3>List A Product</h3>
+        <div className="home-top">
+          <img className="home-image" src={hero} alt="hero image" />
+          <div className="top-options">
+            {user ? (
+              <Link to="/add">
+                <div className="list-product-link">
+                  <h3>List A Product</h3>
+                </div>
+              </Link>
+            ) : null}
+            <div className="categories">
+              <h5>Categories:</h5>
+              <ul>{filterList}</ul>
             </div>
-          </Link>
-        ) : null}
 
-        {items.map((item) => {
-          return (
-            <Product
-              id={item.id}
-              title={item.title}
-              price={item.price}
-              rating={item.rating}
-              image={item.image}
-              category={item.category}
-              ownerid={item.ownerid}
-            />
-          )
-        })}
+            <Search handleSearch={setSearchText} />
+          </div>
+        </div>
+        <div className="item-list">
+          {items
+            .filter(filterMap[filter])
+            .filter((item) => item.title.toLowerCase().includes(searchText))
+            .map((item) => {
+              return (
+                <Product
+                  id={item.id}
+                  title={item.title}
+                  price={item.price}
+                  rating={item.rating}
+                  image={item.image}
+                  category={item.category}
+                  ownerid={item.ownerid}
+                />
+              )
+            })}
+        </div>
       </div>
     </div>
   )
