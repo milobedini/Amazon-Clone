@@ -21,6 +21,7 @@ const filterMap = {
 const filterNames = Object.keys(filterMap)
 
 const Home = () => {
+  // eslint-disable-next-line
   const [{ user }, dispatch] = useStateValue()
 
   const [items, setItems] = useState([])
@@ -57,7 +58,10 @@ const Home = () => {
     <div className="home">
       <div className="home-container">
         <div className="home-top">
-          <img className="home-image" src={hero} alt="hero image" />
+          <img className="home-image" src={hero} alt="hero" />
+          <div className="yard-title">
+            <h1>Yard</h1>
+          </div>
           <div className="top-options">
             {user ? (
               <Link to="/add">

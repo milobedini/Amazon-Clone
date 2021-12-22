@@ -1,7 +1,7 @@
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js'
 import React, { useState, useEffect } from 'react'
 import CurrencyFormat from 'react-currency-format'
-import { Link, useNavigate, useNavigationType } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import '../styles/Payment.scss'
 import CheckoutProduct from './CheckoutProduct'
 import { getBasketTotal } from './reducer'
@@ -49,7 +49,7 @@ const Payment = () => {
     event.preventDefault()
     // make sure only submit once
     setProcessing(true)
-
+    // eslint-disable-next-line
     const payload = await stripe
       .confirmCardPayment(clientSecret, {
         payment_method: {
@@ -61,6 +61,7 @@ const Payment = () => {
 
         try {
           // adds user to users collection and adds order into the users' orders collection
+          // eslint-disable-next-line
           const docRef = addDoc(collection(db, 'users', user?.uid, 'orders'), {
             basket: basket,
             amount: paymentIntent.amount,

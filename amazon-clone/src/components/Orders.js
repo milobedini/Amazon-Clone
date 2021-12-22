@@ -1,13 +1,4 @@
-import {
-  collection,
-  doc,
-  getDoc,
-  getDocs,
-  onSnapshot,
-  orderBy,
-  query,
-  where,
-} from 'firebase/firestore'
+import { collection, getDocs } from 'firebase/firestore'
 import React, { useState, useEffect } from 'react'
 import { db } from '../firebase'
 import '../styles/Orders.scss'
@@ -15,6 +6,7 @@ import Order from './Order'
 import { useStateValue } from './StateProvider'
 
 const Orders = () => {
+  // eslint-disable-next-line
   const [{ basket, user }, dispatch] = useStateValue()
   const [orders, setOrders] = useState([])
 

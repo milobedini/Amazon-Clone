@@ -1,9 +1,8 @@
-import { collection, doc, getDoc, updateDoc } from 'firebase/firestore'
+import { doc, getDoc, updateDoc } from 'firebase/firestore'
 import React, { useState, useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { db } from '../firebase'
 import '../styles/EditProduct.scss'
-import { useForm } from 'react-hook-form'
 
 const EditProduct = () => {
   const { id } = useParams()

@@ -5,7 +5,6 @@ import { auth } from '../firebase'
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
-  signOut,
 } from 'firebase/auth'
 
 const Login = () => {
@@ -16,12 +15,6 @@ const Login = () => {
   const signIn = (event) => {
     event.preventDefault()
 
-    // auth
-    //   .signInWithEmailAndPassword(email, password)
-    //   .then((auth) => {
-    //     navigate('/')
-    //   })
-    //   .catch((error) => alert(error.message))
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const user = userCredential.user
@@ -37,14 +30,6 @@ const Login = () => {
 
   const register = (event) => {
     event.preventDefault()
-    // auth
-    //   .createUserWithEmailAndPassword(email, password)
-    //   .then((auth) => {
-    //     if (auth) {
-    //       navigate('/')
-    //     }
-    //   })
-    //   .catch((error) => alert(error.message))
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const user = userCredential.user
@@ -54,17 +39,6 @@ const Login = () => {
         const errorCode = error.code
         const errorMessage = error.message
         console.log(errorCode, errorMessage)
-      })
-  }
-
-  const logOut = (event) => {
-    event.preventDefault()
-    signOut(auth)
-      .then(() => {
-        console.log('Signed Out')
-      })
-      .catch((error) => {
-        console.log(error.message)
       })
   }
 

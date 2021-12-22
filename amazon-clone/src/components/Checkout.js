@@ -1,10 +1,10 @@
-import React, { forwardRef } from 'react'
 import '../styles/Checkout.scss'
 import CheckoutProduct from './CheckoutProduct'
 import { useStateValue } from './StateProvider'
 import Subtotal from './Subtotal'
 
 const Checkout = () => {
+  // eslint-disable-next-line
   const [{ basket, user }, dispatch] = useStateValue()
 
   return (
