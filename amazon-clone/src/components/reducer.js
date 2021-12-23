@@ -1,7 +1,9 @@
 import { toast } from 'react-toastify'
 
 export const initialState = {
-  basket: [],
+  basket: localStorage.getItem('cartItems')
+    ? JSON.parse(localStorage.getItem('cartItems'))
+    : [],
   user: null,
 }
 
@@ -18,16 +20,17 @@ const reducer = (state, action) => {
       toast.success(`${action.item.title} added to cart`, {
         position: 'bottom-right',
       })
-      // localStorage.setItem(
-      //   'cartItems',
-      //   JSON.stringify([...state.basket, action.item])
-      // )
+      localStorage.setItem(
+        'cartItems',
+        JSON.stringify([...state.basket, action.item])
+      )
       return {
         ...state,
         basket: [...state.basket, action.item],
       }
 
     case 'EMPTY_BASKET':
+      localStorage.setItem('cartItems', [])
       return {
         ...state,
         basket: [],
@@ -47,7 +50,7 @@ const reducer = (state, action) => {
       } else {
         console.warn(`Product ${action.id} is not in basket.`)
       }
-
+      localStorage.setItem('cartItems', JSON.stringify(newBasket))
       return {
         // keeps previous state with new basket
         ...state,
