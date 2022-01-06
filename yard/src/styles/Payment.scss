@@ -49,3 +49,9 @@
     color: #111;
   }
 }
+
+@media only screen and (max-width: 800px) {
+  .payment-section {
+    flex-direction: column;
+  }
+}

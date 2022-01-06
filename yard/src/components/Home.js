@@ -71,7 +71,7 @@ const Home = () => {
               </Link>
             ) : null}
             <div className="categories-search">
-              <ul>{filterList}</ul>
+              <ul className="categories">{filterList}</ul>
               <Search handleSearch={setSearchText} />
             </div>
           </div>

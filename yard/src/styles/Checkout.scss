@@ -11,6 +11,13 @@
   padding: 10px;
   border-bottom: 1px solid lightgray;
 }
+.checkout-top {
+  display: flex;
+  justify-content: space-between;
+}
+.checkout-right {
+  flex: 0.7;
+}
 .no-items {
   button {
     background: #f0c14b;
@@ -21,5 +28,16 @@
     padding: 6px;
     border-radius: 8px;
     margin-left: 1rem;
+  }
+}
+@media only screen and (max-width: 800px) {
+  .checkout-top {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 4px;
+    h3 {
+      margin-bottom: 8px;
+    }
   }
 }

@@ -4,6 +4,14 @@
   border: 1px solid lightgray;
   background-color: white;
   position: relative;
+  display: flex;
+  flex-direction: column;
+
+  // align-items: center;
+  .checkout-product {
+    display: flex;
+    justify-content: space-between;
+  }
 }
 
 .order-id {
@@ -15,4 +23,14 @@
 .order-total {
   font-weight: 500;
   text-align: right;
+}
+
+@media only screen and (max-width: 800px) {
+  .order-id {
+    top: 0px;
+    right: 8px;
+  }
+  .order {
+    padding: 8px;
+  }
 }

@@ -61,6 +61,7 @@
 .header-nav {
   display: flex;
   justify-content: space-evenly;
+  align-items: center;
 }
 
 .header-option {
@@ -69,4 +70,10 @@
   margin-left: 10px;
   margin-right: 10px;
   color: white;
+}
+
+@media only screen and (max-width: 800px) {
+  .user-details {
+    display: none;
+  }
 }

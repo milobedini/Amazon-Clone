@@ -17,8 +17,13 @@ const Checkout = () => {
     <div className="checkout">
       <div className="checkout-left">
         <div>
-          <h3>Hello, {user?.email}</h3>
-          <h2 className="checkout-title">Your shopping Basket</h2>
+          <div className="checkout-top">
+            <h3>Hello, {user?.email}</h3>
+            <div className="checkout-right">
+              <Subtotal />
+            </div>
+          </div>
+          <h2 className="checkout-title">Your Shopping Basket</h2>
           {basket.length > 0 ? (
             basket.map((item) => (
               <CheckoutProduct
@@ -38,10 +43,6 @@ const Checkout = () => {
             </div>
           )}
         </div>
-      </div>
-
-      <div className="checkout-right">
-        <Subtotal />
       </div>
     </div>
   )
