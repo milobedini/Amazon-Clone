@@ -3,6 +3,10 @@
   margin-right: auto;
   max-width: 1500px;
 }
+
+.home-container {
+  border-radius: 40px;
+}
 .yard-title {
   background-color: #131921;
   width: 100%;
@@ -48,6 +52,9 @@
   padding: 8px 0;
   background-color: #131921;
   color: white;
+  border-bottom-left-radius: 30px;
+  border-bottom-right-radius: 30px;
+
   a {
     text-decoration: unset;
     color: white;

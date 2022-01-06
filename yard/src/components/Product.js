@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import { db } from '../firebase'
 import '../styles/Product.scss'
 import { useStateValue } from './StateProvider'
+import { Image } from 'cloudinary-react'
 
 const Product = ({ id, title, image, price, rating, category, ownerid }) => {
   const [{ user }, dispatch] = useStateValue()
@@ -53,7 +54,10 @@ const Product = ({ id, title, image, price, rating, category, ownerid }) => {
           </div>
         </div>
       </div>
-      <img src={image} alt="" />
+      <Image
+        cloudName="dvgbdioec"
+        publicId={`https://res.cloudinary.com/dvgbdioec/image/upload/${image}`}
+      />
       {user?.uid === ownerid ? (
         <div className="edit-delete">
           <Link to={`/${id}/edit`}>

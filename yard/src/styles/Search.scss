@@ -1,7 +1,10 @@
 .search {
   display: flex;
   flex: 0.25;
+
   input {
     flex: 1;
+    border-radius: 6px;
+    border: none;
   }
 }

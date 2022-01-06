@@ -61,7 +61,7 @@ const Home = () => {
         <div className="home-top">
           <img className="home-image" src={hero} alt="hero" />
           <div className="yard-title">
-            <h1>Yard</h1>
+            <h1>Welcome to Yard</h1>
           </div>
           <div className="top-options">
             {user ? (

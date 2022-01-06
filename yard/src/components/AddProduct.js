@@ -1,9 +1,10 @@
 import { addDoc, collection } from 'firebase/firestore'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { db } from '../firebase'
 import '../styles/AddProduct.scss'
 import { useNavigate } from 'react-router-dom'
 import { useStateValue } from './StateProvider'
+import axios from 'axios'
 
 const AddProduct = () => {
   // eslint-disable-next-line
@@ -12,12 +13,13 @@ const AddProduct = () => {
   const itemsRef = collection(db, 'products')
   const [data, setData] = useState({
     title: '',
-    price: 0,
-    rating: 0,
+    price: parseFloat('').toFixed(2),
+    rating: parseInt(''),
     image: '',
     category: '',
     ownerid: user?.uid,
   })
+  const [publicId, setPublicId] = useState('')
 
   const handleFormChange = (event) => {
     const { name, value } = event.target
@@ -25,23 +27,44 @@ const AddProduct = () => {
       ...data,
       [name]: value,
     })
+    console.log(data)
   }
 
-  const addItem = async (event) => {
+  const handleSubmit = (event) => {
     event.preventDefault()
-    await addDoc(itemsRef, {
-      title: data.title,
-      price: data.price,
-      rating: data.rating,
-      image: data.image,
-      category: data.category,
-      ownerid: user?.uid,
-    })
-    navigate('/')
+    const formData = new FormData()
+    formData.append('file', data.image)
+    formData.append('upload_preset', 'ilrqnidr')
+    axios
+      .post('https://api.cloudinary.com/v1_1/dvgbdioec/image/upload', formData)
+      .then((response) => {
+        console.log(response.data)
+        console.log(response.data.public_id)
+        setPublicId(response.data.public_id)
+      })
   }
+  useEffect(() => {
+    if (!publicId) {
+      return
+    }
+    const addItem = async () => {
+      console.log(publicId)
+      await addDoc(itemsRef, {
+        title: data.title,
+        price: parseFloat(data.price),
+        rating: parseInt(data.rating),
+        image: publicId,
+        category: data.category,
+        ownerid: user?.uid,
+      })
+      navigate('/')
+    }
+    addItem()
+  }, [publicId])
+
   return (
     <div className="add-product">
-      <form onSubmit={addItem} className="add-product-form">
+      <form onSubmit={handleSubmit} className="add-product-form">
         <div>
           <label htmlFor="title"></label>
           <input
@@ -55,7 +78,7 @@ const AddProduct = () => {
         <div>
           <label htmlFor="price"></label>
           <input
-            type={'number'}
+            type="text"
             id="price"
             name="price"
             placeholder="Price"
@@ -65,7 +88,7 @@ const AddProduct = () => {
         <div>
           <label htmlFor="rating"></label>
           <input
-            type={'number'}
+            type="text"
             id="rating"
             name="rating"
             placeholder="Rating"
@@ -75,11 +98,17 @@ const AddProduct = () => {
         <div>
           <label htmlFor="image"></label>
           <input
-            type={'text'}
+            type="file"
             id="image"
             name="image"
             placeholder="Image"
-            onChange={handleFormChange}
+            onChange={(event) => {
+              setData({
+                ...data,
+                ['image']: event.target.files[0],
+              })
+              console.log(data)
+            }}
           />
         </div>
         <div>
