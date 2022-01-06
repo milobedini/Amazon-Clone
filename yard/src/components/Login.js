@@ -35,6 +35,7 @@ const Login = () => {
       .then((userCredential) => {
         const user = userCredential.user
         console.log(user)
+        navigate('/')
       })
       .catch((error) => {
         const errorCode = error.code

@@ -92,3 +92,12 @@
   justify-content: center;
   margin-top: 8px;
 }
+
+@media only screen and (max-width: 800px) {
+  .top-options {
+    font-size: 0.7rem;
+  }
+  .yard-title {
+    font-size: 0.8rem;
+  }
+}

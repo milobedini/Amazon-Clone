@@ -3,6 +3,7 @@
   flex-direction: column;
   justify-content: space-between;
   width: 300px;
+  max-width: 40vw;
   height: 120px;
   padding: 20px;
   background-color: #f3f3f3;
@@ -15,16 +16,6 @@
   button {
     padding: 4px;
   }
-}
-
-.subtotal-gift {
-  display: flex;
-  align-items: center;
-}
-
-.subtotal-gift > input {
-  margin-right: 5px;
-  background-color: grey;
 }
 
 .subtotal > button {
