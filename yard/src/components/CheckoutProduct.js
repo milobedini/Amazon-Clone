@@ -1,6 +1,7 @@
 import React from 'react'
 import '../styles/CheckoutProduct.scss'
 import { useStateValue } from './StateProvider'
+import { Image } from 'cloudinary-react'
 
 const CheckoutProduct = ({ id, image, title, price, rating, hideButton }) => {
   // eslint-disable-next-line
@@ -15,10 +16,17 @@ const CheckoutProduct = ({ id, image, title, price, rating, hideButton }) => {
 
   return (
     <div className="checkout-product">
-      <img
+      {/* <img
         className="checkoutProduct-image"
         src={image}
         alt="checkout product"
+      /> */}
+
+      <Image
+        cloudName="dvgbdioec"
+        publicId={`https://res.cloudinary.com/dvgbdioec/image/upload/${image}`}
+        alt="checkout product"
+        className="checkoutProduct-image"
       />
 
       <div className="checkoutProduct-info">
