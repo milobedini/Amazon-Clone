@@ -60,10 +60,12 @@ const AddProduct = () => {
       navigate('/')
     }
     addItem()
+    // eslint-disable-next-line
   }, [publicId])
 
   return (
-    <div className="add-product">
+    <div className="product-form">
+      <h1>Add Your Product</h1>
       <form onSubmit={handleSubmit} className="add-product-form">
         <div>
           <label htmlFor="title"></label>
@@ -105,7 +107,7 @@ const AddProduct = () => {
             onChange={(event) => {
               setData({
                 ...data,
-                ['image']: event.target.files[0],
+                image: event.target.files[0],
               })
               console.log(data)
             }}

@@ -55,8 +55,6 @@
   padding: 8px 0;
   background-color: #131921;
   color: white;
-  border-bottom-left-radius: 30px;
-  border-bottom-right-radius: 30px;
 
   a {
     text-decoration: unset;
@@ -67,14 +65,14 @@
   flex: 0.8;
   display: flex;
   flex-direction: column;
-  align-items: center;
+
   padding-bottom: 8px;
 
   ul {
     width: 100%;
     display: flex;
 
-    justify-content: space-between;
+    justify-content: flex-start;
     flex-wrap: wrap;
     padding-bottom: 1rem;
   }
@@ -85,7 +83,7 @@
     padding: 8px;
     border-radius: 20px;
     margin-top: 8px;
-    margin-right: 2px;
+    margin-right: 0.5rem;
   }
   h5 {
     padding-bottom: 4px;
@@ -96,7 +94,7 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  margin-top: 8px;
+  margin-top: 20px;
 }
 
 @media only screen and (max-width: 800px) {
@@ -110,6 +108,9 @@
     width: 100%;
     button {
       font-size: 11px;
+    }
+    ul {
+      justify-content: unset;
     }
   }
   .categories {
