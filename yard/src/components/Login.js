@@ -6,6 +6,7 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
 } from 'firebase/auth'
+import logo from '../images/logo.png'
 
 const Login = () => {
   const navigate = useNavigate()
@@ -45,11 +46,7 @@ const Login = () => {
   return (
     <div className="login">
       <Link to="/">
-        <img
-          className="login-logo"
-          src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Amazon_logo.svg/1024px-Amazon_logo.svg.png"
-          alt="logo"
-        />
+        <img className="login-logo" src={logo} alt="logo" />
       </Link>
 
       <div className="login-container">
@@ -75,15 +72,16 @@ const Login = () => {
           </button>
         </form>
 
-        <p>
-          By signing-in you agree to the Yard Conditions of Use {' &'}
-          Sale. Please see our Privacy Notice, our Cookies Notice and our
-          Interest-Based Ads Notice.
-        </p>
+        <p>Not signed up yet? Fill your details in and hit the button below.</p>
 
         <button onClick={register} className="login-registerButton">
-          Create your Amazon Account
+          Create your Yard Account
         </button>
+
+        <p>
+          By signing-in you agree to the Yard Conditions of Use {' & '}
+          Sale.
+        </p>
       </div>
     </div>
   )

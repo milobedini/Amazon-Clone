@@ -8,7 +8,6 @@ import { useStateValue } from './StateProvider'
 import FilterButton from './FilterButton'
 import Search from './Search'
 import hero from '../images/hero.jpg'
-import { ToastContainer } from 'react-toastify'
 
 const filterMap = {
   All: () => true,
@@ -71,12 +70,10 @@ const Home = () => {
                 </div>
               </Link>
             ) : null}
-            <div className="categories">
-              <h5>Categories:</h5>
+            <div className="categories-search">
               <ul>{filterList}</ul>
+              <Search handleSearch={setSearchText} />
             </div>
-
-            <Search handleSearch={setSearchText} />
           </div>
         </div>
         <div className="item-list">

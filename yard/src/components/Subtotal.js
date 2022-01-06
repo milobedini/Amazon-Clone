@@ -26,9 +26,6 @@ const Subtotal = () => {
         thousandSeparator={true}
         prefix={'£'}
       />
-      <small className="subtotal-gift">
-        <input type="checkbox" /> This order contains a gift
-      </small>
       <button onClick={() => navigate('/payment')}>Proceed to Checkout</button>
     </div>
   )
