@@ -26,6 +26,7 @@ const Home = () => {
   const [{ user }, dispatch] = useStateValue()
 
   const [items, setItems] = useState([])
+  const [allItems, setAllItems] = useState([])
   const itemsRef = collection(db, 'products')
 
   const [filter, setFilter] = useState('All')
@@ -34,8 +35,13 @@ const Home = () => {
   useEffect(() => {
     const getItems = async () => {
       const data = await getDocs(itemsRef)
-      console.log(data.docs)
       setItems(
+        data.docs.map((doc) => ({
+          ...doc.data(),
+          id: doc.id,
+        }))
+      )
+      setAllItems(
         data.docs.map((doc) => ({
           ...doc.data(),
           id: doc.id,
@@ -45,7 +51,7 @@ const Home = () => {
     getItems()
     // eslint-disable-next-line
   }, [])
-
+  console.log(items)
   const filterList = filterNames.map((name) => (
     <FilterButton
       key={name}
@@ -73,7 +79,13 @@ const Home = () => {
             ) : null}
             <div className="categories-search">
               <ul className="categories">{filterList}</ul>
-              <Search handleSearch={setSearchText} />
+              <Search
+                handleSearch={setSearchText}
+                placeholder="Search our stock"
+                data={allItems}
+                setItems={setItems}
+                items={items}
+              />
             </div>
           </div>
         </div>
