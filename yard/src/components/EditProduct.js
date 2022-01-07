@@ -4,6 +4,8 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { db } from '../firebase'
 import '../styles/EditProduct.scss'
 import axios from 'axios'
+import Select from 'react-select'
+import { categoryList } from './Select'
 
 const EditProduct = () => {
   const { id } = useParams()
@@ -13,7 +15,6 @@ const EditProduct = () => {
     title: '',
     price: 0,
     image: '',
-    category: '',
   })
   const [publicId, setPublicId] = useState('')
 
@@ -21,8 +22,8 @@ const EditProduct = () => {
     title: '',
     price: '',
     image: '',
-    category: '',
   })
+  const [categories, setCategories] = useState([])
 
   const itemRef = doc(db, 'products', id)
 
@@ -81,7 +82,7 @@ const EditProduct = () => {
         title: data.title,
         price: data.price,
         image: publicId,
-        category: data.category,
+        category: categories.map((x) => x.value),
       }
       await updateDoc(productDoc, newFields)
       navigate('/')
@@ -89,6 +90,17 @@ const EditProduct = () => {
     updateProduct()
     // eslint-disable-next-line
   }, [publicId])
+
+  const customTheme = (theme) => {
+    return {
+      ...theme,
+      colors: {
+        ...theme.colors,
+        primary25: 'orange',
+        primary: 'green',
+      },
+    }
+  }
 
   return (
     <div className="product-form">
@@ -133,23 +145,20 @@ const EditProduct = () => {
             defaultValue={preloadedValues.image}
           />
         </div>
-        <div>
-          <label htmlFor="category"></label>
-          <input
-            type={'text'}
-            id="category"
-            name="category"
-            placeholder="Category"
-            onChange={handleFormChange}
-            defaultValue={preloadedValues.category}
-          />
-        </div>
-        <div>
-          <button>
-            <input type={'submit'} value="Edit Product" />
-          </button>
-        </div>
       </form>
+      <Select
+        options={categoryList}
+        theme={customTheme}
+        onChange={setCategories}
+        className="select"
+        placeholder="Select Category"
+        noOptionsMessage={() => 'No other categories!'}
+        isSearchable
+        isMulti
+      />
+      <button onClick={handleSubmit}>
+        <input type={'submit'} value="Edit Product" />
+      </button>
     </div>
   )
 }

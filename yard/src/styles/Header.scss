@@ -39,11 +39,11 @@
 }
 
 .header-option-one {
-  font-size: 10px;
+  font-size: 16px;
 }
 
 .header-option-two {
-  font-size: 13px;
+  font-size: 18px;
   font-weight: 800;
 }
 
@@ -79,5 +79,11 @@
   .header-option {
     margin-left: 8px;
     margin-right: 8px;
+  }
+  .header-option-one {
+    font-size: 10px;
+  }
+  .header-option-two {
+    font-size: 13px;
   }
 }

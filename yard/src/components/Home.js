@@ -11,11 +11,12 @@ import hero from '../images/hero.jpg'
 
 const filterMap = {
   All: () => true,
-  Books: (item) => item.category.toLowerCase().includes('book'),
-  DIY: (item) => item.category.toUpperCase().includes('DIY'),
-  Electronics: (item) => item.category.toLowerCase().includes('electronics'),
-  HomeAndGarden: (item) => item.category.toLowerCase().includes('home'),
-  Kitchen: (item) => item.category.toLowerCase().includes('kitchen'),
+  Books: (item) => item.category.includes('Books'),
+  DIY: (item) => item.category.includes('Diy') || item.category.includes('DIY'),
+  Electronics: (item) => item.category.includes('Electronics'),
+  Garden: (item) => item.category.includes('Garden'),
+  Home: (item) => item.category.includes('Home'),
+  Kitchen: (item) => item.category.includes('Kitchen'),
 }
 
 const filterNames = Object.keys(filterMap)

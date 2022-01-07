@@ -5,6 +5,8 @@ import '../styles/AddProduct.scss'
 import { useNavigate } from 'react-router-dom'
 import { useStateValue } from './StateProvider'
 import axios from 'axios'
+import Select from 'react-select'
+import { categoryList, stars } from './Select'
 
 const AddProduct = () => {
   // eslint-disable-next-line
@@ -14,12 +16,12 @@ const AddProduct = () => {
   const [data, setData] = useState({
     title: '',
     price: parseFloat('').toFixed(2),
-    rating: parseInt(''),
     image: '',
-    category: '',
     ownerid: user?.uid,
   })
   const [publicId, setPublicId] = useState('')
+  const [categories, setCategories] = useState([])
+  const [rating, setRating] = useState({})
 
   const handleFormChange = (event) => {
     const { name, value } = event.target
@@ -52,9 +54,9 @@ const AddProduct = () => {
       await addDoc(itemsRef, {
         title: data.title,
         price: parseFloat(data.price),
-        rating: parseInt(data.rating),
+        rating: rating.value,
         image: publicId,
-        category: data.category,
+        category: categories.map((x) => x.value),
         ownerid: user?.uid,
       })
       navigate('/')
@@ -62,6 +64,19 @@ const AddProduct = () => {
     addItem()
     // eslint-disable-next-line
   }, [publicId])
+
+  const customTheme = (theme) => {
+    return {
+      ...theme,
+      colors: {
+        ...theme.colors,
+        primary25: 'orange',
+        primary: 'green',
+      },
+    }
+  }
+
+  console.log(categories, rating)
 
   return (
     <div className="product-form">
@@ -88,16 +103,6 @@ const AddProduct = () => {
           />
         </div>
         <div>
-          <label htmlFor="rating"></label>
-          <input
-            type="text"
-            id="rating"
-            name="rating"
-            placeholder="Rating"
-            onChange={handleFormChange}
-          />
-        </div>
-        <div>
           <label htmlFor="image"></label>
           <input
             type="file"
@@ -113,22 +118,28 @@ const AddProduct = () => {
             }}
           />
         </div>
-        <div>
-          <label htmlFor="category"></label>
-          <input
-            type={'text'}
-            id="category"
-            name="category"
-            placeholder="Category"
-            onChange={handleFormChange}
-          />
-        </div>
-        <div>
-          <button>
-            <input type={'submit'} value="Add Product" />
-          </button>
-        </div>
       </form>
+      <Select
+        options={categoryList}
+        theme={customTheme}
+        onChange={setCategories}
+        className="select"
+        placeholder="Select Category"
+        noOptionsMessage={() => 'No other categories!'}
+        isSearchable
+        isMulti
+      />
+      <Select
+        options={stars}
+        theme={customTheme}
+        onChange={setRating}
+        className="select"
+        placeholder="Star Rating"
+        isSearchable={false}
+      />
+      <button onClick={handleSubmit}>
+        <input type={'submit'} value="Add Product" />
+      </button>
     </div>
   )
 }

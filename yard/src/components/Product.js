@@ -41,7 +41,9 @@ const Product = ({ id, title, image, price, rating, category, ownerid }) => {
             <strong>£{price}</strong>
           </p>
           <p className="product-category">
-            <small>*{category}*</small>
+            {category.length > 1
+              ? category.map((x) => <small className="mulit-cat">{x}, </small>)
+              : category[0]}
           </p>
         </div>
         <div className="product-rating">
