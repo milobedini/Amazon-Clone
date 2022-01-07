@@ -19,6 +19,7 @@ const Search = ({ handleSearch, placeholder, data, setItems, items }) => {
 
   const changeHome = () => {
     setItems(filteredData)
+    setWordEntered('')
   }
 
   const clearInput = () => {
@@ -45,6 +46,7 @@ const Search = ({ handleSearch, placeholder, data, setItems, items }) => {
           onClick={clearInput}
         />
       </div>
+
       {filteredData.length !== 0 && (
         <div className="search-result">
           {filteredData.slice(0, 15).map((value, key) => {

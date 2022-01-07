@@ -63,6 +63,7 @@
 }
 .categories-search {
   flex: 0.8;
+  height: 200px;
   display: flex;
   flex-direction: column;
 
@@ -100,6 +101,7 @@
 @media only screen and (max-width: 800px) {
   .top-options {
     font-size: 0.7rem;
+    flex-direction: column;
   }
   .yard-title {
     font-size: 0.8rem;
@@ -110,7 +112,7 @@
       font-size: 11px;
     }
     ul {
-      justify-content: unset;
+      justify-content: center;
     }
   }
   .categories {
@@ -122,5 +124,16 @@
   }
   .home-top img {
     height: 250px;
+  }
+  .search {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
+  .search-left {
+    width: 100%;
+    display: flex;
+    justify-content: center;
   }
 }

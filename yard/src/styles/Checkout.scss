@@ -5,6 +5,9 @@
   height: max-content;
   justify-content: space-around;
 }
+.checkout-left {
+  width: 80%;
+}
 
 .checkout-title {
   margin-right: 10px;
@@ -14,6 +17,7 @@
 .checkout-top {
   display: flex;
   justify-content: space-between;
+
   h3 {
     margin-right: 12px;
   }

@@ -71,11 +71,13 @@ const Home = () => {
           </div>
           <div className="top-options">
             {user ? (
-              <Link to="/add">
-                <div className="list-product-link">
-                  <h3>List A Product</h3>
-                </div>
-              </Link>
+              <div className="list-product">
+                <Link to="/add">
+                  <div className="list-product-link">
+                    <h3>List A Product</h3>
+                  </div>
+                </Link>
+              </div>
             ) : null}
             <div className="categories-search">
               <ul className="categories">{filterList}</ul>
