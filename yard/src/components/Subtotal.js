@@ -26,7 +26,13 @@ const Subtotal = () => {
         thousandSeparator={true}
         prefix={'£'}
       />
-      <button onClick={() => navigate('/payment')}>Proceed to Checkout</button>
+      {basket.length > 0 ? (
+        <button onClick={() => navigate('/payment')}>
+          Proceed to Checkout
+        </button>
+      ) : (
+        <button onClick={() => navigate('/')}>Basket is Empty</button>
+      )}
     </div>
   )
 }

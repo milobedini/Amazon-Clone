@@ -4,6 +4,7 @@ import { collection, query, where, getDocs } from 'firebase/firestore'
 import { db } from '../firebase'
 import { useStateValue } from './StateProvider'
 import Product from './Product'
+import { Link } from 'react-router-dom'
 
 const Profile = () => {
   // eslint-disable-next-line
@@ -30,7 +31,17 @@ const Profile = () => {
 
   return (
     <div className="profile">
-      <h1>Your Listings</h1>
+      <div className="profile-header">
+        <h1>{user?.email}</h1>
+        <div className="list-product">
+          <Link to="/add">
+            <div className="list-product-link">
+              <h3>List A Product</h3>
+            </div>
+          </Link>
+        </div>
+      </div>
+      <h2>Your Listed Products</h2>
       <div className="item-list">
         {ownedProducts.map((item) => {
           return (

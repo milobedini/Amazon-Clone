@@ -1,0 +1,22 @@
+.profile {
+  margin: 8px;
+  h2 {
+    text-align: center;
+    margin-top: 2rem;
+  }
+}
+
+.profile-header {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 2rem;
+  align-items: center;
+}
+
+.list-product-link {
+  border: 1px solid white;
+  background-color: #131921;
+  color: white;
+  border-radius: 20px;
+  padding: 16px;
+}

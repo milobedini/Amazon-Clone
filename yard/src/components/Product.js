@@ -43,7 +43,7 @@ const Product = ({ id, title, image, price, rating, category, ownerid }) => {
           <p className="product-category">
             {category.length > 1
               ? category.map((x) => (
-                  <small key={x} className="mulit-cat">
+                  <small key={x} className="multi-cat">
                     {x},{' '}
                   </small>
                 ))

@@ -11,6 +11,8 @@ import { categoryList, stars } from './Select'
 const AddProduct = () => {
   // eslint-disable-next-line
   const [{ user }, dispatch] = useStateValue()
+  const [processing, setProcessing] = useState(false)
+
   const navigate = useNavigate()
   const itemsRef = collection(db, 'products')
   const [data, setData] = useState({
@@ -34,6 +36,7 @@ const AddProduct = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault()
+    setProcessing(true)
     const formData = new FormData()
     formData.append('file', data.image)
     formData.append('upload_preset', 'ilrqnidr')
@@ -137,8 +140,12 @@ const AddProduct = () => {
         placeholder="Star Rating"
         isSearchable={false}
       />
-      <button onClick={handleSubmit}>
-        <input type={'submit'} value="Add Product" />
+      <button className="add-product" onClick={handleSubmit}>
+        {!processing ? (
+          <input type={'submit'} value="Add Product" />
+        ) : (
+          <span>Adding Product....</span>
+        )}
       </button>
     </div>
   )

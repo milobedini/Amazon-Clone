@@ -3,6 +3,7 @@ import CheckoutProduct from './CheckoutProduct'
 import { useStateValue } from './StateProvider'
 import Subtotal from './Subtotal'
 import { useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
 
 const Checkout = () => {
   const navigate = useNavigate()
@@ -11,6 +12,15 @@ const Checkout = () => {
 
   const browse = () => {
     navigate('/')
+  }
+
+  const emptyBasket = () => {
+    toast.info(`${basket.length} items removed`, {
+      position: 'bottom-right',
+    })
+    dispatch({
+      type: 'EMPTY_BASKET',
+    })
   }
 
   return (
@@ -44,6 +54,11 @@ const Checkout = () => {
             </div>
           )}
         </div>
+        {basket.length > 0 ? (
+          <div className="empty-basket">
+            <button onClick={emptyBasket}>Empty Basket</button>
+          </div>
+        ) : null}
       </div>
     </div>
   )

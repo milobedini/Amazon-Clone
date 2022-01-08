@@ -37,6 +37,21 @@
     margin-left: 1rem;
   }
 }
+.empty-basket {
+  display: flex;
+  justify-content: flex-end;
+  button {
+    background: #131921;
+    border: 1px solid;
+    margin-top: 10px;
+    border-color: #a88734 #9c7e31 #846a29;
+    color: white;
+    padding: 6px;
+    border-radius: 8px;
+    margin-left: 1rem;
+    width: 20%;
+  }
+}
 @media only screen and (max-width: 800px) {
   .checkout-top {
     flex-direction: column;
