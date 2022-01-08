@@ -50,7 +50,8 @@
   width: 100%;
   margin-bottom: -10px;
   display: flex;
-  justify-content: space-around;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
   padding: 8px 0;
   background-color: #131921;
@@ -66,7 +67,7 @@
   height: 200px;
   display: flex;
   flex-direction: column;
-
+  width: 80%;
   padding-bottom: 8px;
 
   ul {
@@ -107,7 +108,6 @@
     font-size: 0.8rem;
   }
   .categories-search {
-    width: 100%;
     button {
       font-size: 11px;
     }
