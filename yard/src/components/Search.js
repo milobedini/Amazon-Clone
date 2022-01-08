@@ -14,12 +14,12 @@ const Search = ({ handleSearch, placeholder, data, setItems, items }) => {
     })
     if (searchTerm === '') {
       setFilteredData([])
+      setItems(data)
     } else setFilteredData(newFilter)
   }
 
   const changeHome = () => {
     setItems(filteredData)
-    setWordEntered('')
   }
 
   const clearInput = () => {

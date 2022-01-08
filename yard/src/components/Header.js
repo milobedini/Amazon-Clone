@@ -41,10 +41,12 @@ const Header = () => {
               <span className="header-option-two">{'&'} Orders</span>
             </div>
           </Link>
-          <div className="header-option">
-            <span className="header-option-one">Your</span>
-            <span className="header-option-two">Account</span>
-          </div>
+          <Link to="/profile">
+            <div className="header-option">
+              <span className="header-option-one">Your</span>
+              <span className="header-option-two">Account</span>
+            </div>
+          </Link>
           <Link to="/checkout">
             <div className="header-option-basket">
               <ShoppingBasketIcon />
