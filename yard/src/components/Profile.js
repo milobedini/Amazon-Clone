@@ -21,7 +21,7 @@ const Profile = () => {
       const usefulArray = []
       querySnapshot.forEach((doc) => {
         console.log(doc.id, '=>', doc.data())
-        usefulArray.push(doc.data())
+        usefulArray.push({ ...doc.data(), id: doc.id })
       })
       setOwnedProducts(usefulArray)
     }
