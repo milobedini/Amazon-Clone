@@ -17,6 +17,7 @@ import EditProduct from './components/EditProduct'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import Profile from './components/Profile'
+import Wishlist from './components/Wishlist'
 
 const promise = loadStripe(
   'pk_test_51K8nLHICFeSjij0Mp1SaCzr3s9r6DiP3e5H6PUnVw8qG9U4PCZOoZgmBhGq9e6QgPqqXTrvO0KLkHNwhRE51e4Gj00LfkGV4mk'
@@ -74,6 +75,7 @@ function App() {
             />
             <Route path="/orders" element={<Orders />} />
             <Route path="/profile" element={<Profile />} />
+            <Route path="/wishlist" element={<Wishlist />} />
           </Routes>
         </main>
       </BrowserRouter>

@@ -33,12 +33,21 @@ const Profile = () => {
     <div className="profile">
       <div className="profile-header">
         <h1>{user?.email}</h1>
-        <div className="list-product">
-          <Link to="/add">
-            <div className="list-product-link">
-              <h3>List A Product</h3>
-            </div>
-          </Link>
+        <div className="profile-links">
+          <div className="list-product">
+            <Link to="/add">
+              <div className="list-product-link">
+                <h3>List A Product</h3>
+              </div>
+            </Link>
+          </div>
+          <div className="wishlist-link">
+            <Link to="/wishlist">
+              <div className="wishlist-title list-product-link">
+                <h3>Wishlist</h3>
+              </div>
+            </Link>
+          </div>
         </div>
       </div>
       <h2>Your Listed Products</h2>
